@@ -10,11 +10,11 @@
   (first (drop-while #(<= % prime) numbers)))
 
 (defn- sieve [numbers prime]
-  (let [sieved (remove #(multiple-of? % prime) numbers)
-        next-prime (next-prime prime sieved)]
-    (if (nil? next-prime)
-      sieved
-      (recur sieved next-prime))))
+  (remove #(multiple-of? % prime) numbers))
 
 (defn primes-up-to [n]
-  (sieve (integers-up-to n) 2))
+  (loop [numbers (integers-up-to n) prime 1]
+    (let [next-prime (next-prime prime numbers)]
+      (if (nil? next-prime)
+        numbers
+        (recur (sieve numbers next-prime) next-prime)))))
