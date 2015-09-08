@@ -1,3 +1,8 @@
 (remove #(not= 3) [2 3 4 5])
 (remove #(not= % 3) [2 3 4 5])
 (remove #(and (zero? (mod % 2)) (not= % 2)) [2 3 4 5])
+(drop-while (<= 3) [1 2 3 4 5 6 7 8 9])
+(drop-while #(<= 3) [1 2 3 4 5 6 7 8 9])
+(drop-while #(<= % 3) [1 2 3 4 5 6 7 8 9])
+(first (drop-while #(<= % 3) [1 2 3 4 5 6 7 8 9]))
+(first (drop-while #(<= % 10) [1 2 3 4 5 6 7 8 9]))

@@ -7,7 +7,11 @@
   (and (zero? (mod n p)) (not= n p)))
 
 (defn- sieve [numbers prime]
-  (remove #(multiple-of? % prime) numbers))
+  (let [sieved (remove #(multiple-of? % prime) numbers)
+        next-prime (first (drop-while #(<= % prime) sieved))]
+    (if (nil? next-prime)
+      sieved
+      (recur sieved next-prime))))
 
 (defn primes-up-to [n]
-  (sieve (sieve(integers-up-to n) 2) 3))
+  (sieve (integers-up-to n) 2))
