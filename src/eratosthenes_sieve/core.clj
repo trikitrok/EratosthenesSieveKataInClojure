@@ -14,7 +14,6 @@
 
 (defn primes-up-to [n]
   (loop [numbers (integers-up-to n) prime 1]
-    (let [next-prime (next-prime prime numbers)]
-      (if (nil? next-prime)
-        numbers
-        (recur (sieve numbers next-prime) next-prime)))))
+    (if-let [next-prime (next-prime prime numbers)]
+      (recur (sieve numbers next-prime) next-prime)
+      numbers)))
