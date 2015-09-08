@@ -1,4 +1,4 @@
 (ns eratosthenes-sieve.core)
 
 (defn primes-up-to [n]
-  [2])
+  (range 2 (inc n)))
