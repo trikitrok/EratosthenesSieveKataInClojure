@@ -6,9 +6,12 @@
 (defn- multiple-of? [n p]
   (and (zero? (mod n p)) (not= n p)))
 
+(defn- next-prime [prime numbers]
+  (first (drop-while #(<= % prime) numbers)))
+
 (defn- sieve [numbers prime]
   (let [sieved (remove #(multiple-of? % prime) numbers)
-        next-prime (first (drop-while #(<= % prime) sieved))]
+        next-prime (next-prime prime sieved)]
     (if (nil? next-prime)
       sieved
       (recur sieved next-prime))))
