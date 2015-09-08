@@ -1,0 +1,3 @@
+(remove #(not= 3) [2 3 4 5])
+(remove #(not= % 3) [2 3 4 5])
+(remove #(and (zero? (mod % 2)) (not= % 2)) [2 3 4 5])
