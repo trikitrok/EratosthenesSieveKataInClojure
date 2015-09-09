@@ -9,13 +9,15 @@
 (defn- next-prime [prime numbers]
   (first (drop-while #(<= % prime) numbers)))
 
-(defn- remove-multiples [numbers prime]
+(defn- sieve-multiples-of [prime numbers]
   (remove #(multiple-of? % prime) numbers))
 
-(defn- sieve [numbers p]
-  (if-let [next-p (next-prime p numbers)]
-    (recur (remove-multiples numbers next-p) next-p)
-    numbers))
+(defn- sieve [numbers]
+  (loop [primes numbers prime 2]
+    (let [sieved (sieve-multiples-of prime primes)]
+      (if-let [prime (next-prime prime sieved)]
+        (recur sieved prime)
+        primes))))
 
 (defn primes-up-to [n]
-  (sieve (integers-up-to n) 1))
+  (sieve (integers-up-to n)))
